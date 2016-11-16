@@ -8,8 +8,7 @@ var colorNum;
 var randColor;
 var color;
 var usedQuote;
-var add;
-var quoteDelete;
+
 
 /*Array of different background colors I specifically selected.
     They will be randomly selected from this array.*/
@@ -96,7 +95,7 @@ function getRandomColor( top ) {
         usedColors = [];
     }
     console.log(colors[colorNum]);
-    return colorNum;
+    return colors[colorNum];
 
 }
 
@@ -124,8 +123,8 @@ function printQuote( words ) {
 //Displays random color to screen as background by placing it in html element with id back-color
 
 function printBackColor( color ) {
-    getRandomColor();
-    randColor = colors[colorNum];
+
+    randColor = getRandomColor();
     color = "body {background-color: " + randColor + "; }";
     document.getElementById('back-color').innerHTML = color;
 
@@ -139,7 +138,7 @@ printBackColor(color);
 
 
 
-//Prints new quote when 'show another quote' botton is clicked
+//Prints new quote when 'show another quote' button is clicked
 
 document.getElementById('loadQuote').addEventListener("click", printQuote);
 
@@ -147,6 +146,9 @@ document.getElementById('loadQuote').addEventListener("click", printQuote);
 
 document.getElementById('loadQuote').addEventListener("click", printBackColor);
 
-//Sets timer to 30 seconds. Calls print functions every 30 seconds.
-var interval1 = window.setInterval(printQuote, 30000);
+//Calls print color function every 30 seconds
 var interval2 = window.setInterval(printBackColor, 30000);
+
+
+//Calls print quote function every 30 seconds
+var interval1 = window.setInterval(printQuote, 30000);
