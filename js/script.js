@@ -43,7 +43,8 @@ var usedQuotes = [];
 
 var usedColors = [];
 
-
+var color;
+var words;
 
 /*Calculates random number based on the length of the Quotes array
 -Checks if new quote has been pushed into Used Quotes array
@@ -97,7 +98,7 @@ function printQuote( words ) {
 
         var text = selectedQuote.quote;
         var sources = selectedQuote.source;
-        var words = "<p class='quote'>" + text + "</p>" +
+        words = "<p class='quote'>" + text + "</p>" +
             "<p class='source'>" + sources + "</p>";
 
 
@@ -116,7 +117,7 @@ function printQuote( words ) {
 function printBackColor( color ) {
 
     var randColor = getRandomColor();
-    var color = "body {background-color: " + randColor + "; }";
+    color = "body {background-color: " + randColor + "; }";
     document.getElementById('back-color').innerHTML = color;
 
 }
