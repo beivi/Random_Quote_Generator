@@ -1,13 +1,4 @@
 
-var quoteNum;
-var text;
-var sources;
-var words;
-var top;
-var colorNum;
-var randColor;
-var color;
-var usedQuote;
 
 
 /*Array of different background colors I specifically selected.
@@ -62,10 +53,10 @@ var usedColors = [];
 function getRandomQuote() {
 
 
-    quoteNum = Math.floor(Math.random() * upper);
-    while (usedQuotes.indexOf(quotes[quoteNum]) != -1) {
-        quoteNum = Math.floor(Math.random() * upper);
-    }
+    do {
+        var quoteNum = Math.floor(Math.random() * upper);
+    } while (usedQuotes.indexOf(quotes[quoteNum]) != -1);
+
 
     usedQuotes.push(quotes[quoteNum]);
 
@@ -84,11 +75,11 @@ function getRandomQuote() {
 -Once Used Colors array is full, resets to start again*/
 
 function getRandomColor( top ) {
-    top = colors.length;
-    colorNum = Math.floor(Math.random() * top);
-    while (usedColors.indexOf(colors[colorNum]) != -1) {
+    var top = colors.length;
+    do {
         colorNum = Math.floor(Math.random() * top);
-    }
+    } while (usedColors.indexOf(colors[colorNum]) != -1);
+
     usedColors.push(colors[colorNum]);
 
     if (usedColors.length === colors.length) {
@@ -104,9 +95,9 @@ function getRandomColor( top ) {
 function printQuote( words ) {
         var selectedQuote = getRandomQuote();
 
-        text = selectedQuote.quote;
-        sources = selectedQuote.source;
-        words = "<p class='quote'>" + text + "</p>" +
+        var text = selectedQuote.quote;
+        var sources = selectedQuote.source;
+        var words = "<p class='quote'>" + text + "</p>" +
             "<p class='source'>" + sources + "</p>";
 
 
@@ -124,8 +115,8 @@ function printQuote( words ) {
 
 function printBackColor( color ) {
 
-    randColor = getRandomColor();
-    color = "body {background-color: " + randColor + "; }";
+    var randColor = getRandomColor();
+    var color = "body {background-color: " + randColor + "; }";
     document.getElementById('back-color').innerHTML = color;
 
 }
