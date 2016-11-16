@@ -1,4 +1,4 @@
-var upper = quotes.length;
+
 var quoteNum;
 var text;
 var sources;
@@ -32,25 +32,39 @@ var colors = [
     "#779ecb",
     "#996fd6",
     "#559e83",
-    "#bae9ea"
+    "#bae9ea",
+    "#e1f7d5",
+    "#ffbdbd",
+    "#c9c9ff",
+    "#f1cbff",
+    "#57bcd9",
+    "#ae70ed",
+    "#80b584",
+    "#ba21e0"
 ];
+
+var upper = quotes.length;
 
 //Empty array for used quotes
 
 var usedQuotes = [];
 
+//Empty array for used colors
+
+var usedColors = [];
 
 
 
-
-
-//Calculates random number based on the length of the Quotes array
+/*Calculates random number based on the length of the Quotes array
+-Checks if new quote has been pushed into Used Quotes array
+-If not, pushes new quote into Used Quotes array and returns new random quote
+-Once Used Quotes array is full, resets to start again*/
 
 function getRandomQuote() {
 
 
     quoteNum = Math.floor(Math.random() * upper);
-    while (usedQuotes.indexOf(quotes[quoteNum]) !== -1) {
+    while (usedQuotes.indexOf(quotes[quoteNum]) != -1) {
         quoteNum = Math.floor(Math.random() * upper);
     }
 
@@ -65,12 +79,23 @@ function getRandomQuote() {
 }
 
 
-//Calculates random number based on the length of the Colors array
+/*Calculates random number based on the length of the Colors array
+-Checks if new color has been pushed into Used Colors array
+-If not, pushes new color into Used Colors array and returns new random color
+-Once Used Colors array is full, resets to start again*/
 
 function getRandomColor( top ) {
     top = colors.length;
     colorNum = Math.floor(Math.random() * top);
+    while (usedColors.indexOf(colors[colorNum]) != -1) {
+        colorNum = Math.floor(Math.random() * top);
+    }
+    usedColors.push(colors[colorNum]);
 
+    if (usedColors.length === colors.length) {
+        usedColors = [];
+    }
+    console.log(colors[colorNum]);
     return colorNum;
 
 }
@@ -121,3 +146,7 @@ document.getElementById('loadQuote').addEventListener("click", printQuote);
 //Changes background color when 'show another quote' botton is clicked
 
 document.getElementById('loadQuote').addEventListener("click", printBackColor);
+
+//Sets timer to 30 seconds. Calls print functions every 30 seconds.
+var interval1 = window.setInterval(printQuote, 30000);
+var interval2 = window.setInterval(printBackColor, 30000);
