@@ -1,15 +1,15 @@
-var upper;
+var upper = quotes.length;
 var quoteNum;
 var text;
 var sources;
 var words;
-var theWords;
 var top;
 var colorNum;
 var randColor;
 var color;
 var usedQuote;
-var number;
+var add;
+var quoteDelete;
 
 /*Array of different background colors I specifically selected.
     They will be randomly selected from this array.*/
@@ -40,13 +40,27 @@ var colors = [
 var usedQuotes = [];
 
 
+
+
+
+
 //Calculates random number based on the length of the Quotes array
 
 function getRandomQuote() {
-    upper = quotes.length;
-    quoteNum = Math.floor(Math.random() * upper);
 
-    return quoteNum;
+
+    quoteNum = Math.floor(Math.random() * upper);
+    while (usedQuotes.indexOf(quotes[quoteNum]) !== -1) {
+        quoteNum = Math.floor(Math.random() * upper);
+    }
+
+    usedQuotes.push(quotes[quoteNum]);
+
+    if (usedQuotes.length === quotes.length) {
+        usedQuotes = [];
+    }
+    console.log(quotes[quoteNum]);
+    return quotes[quoteNum];
 
 }
 
@@ -64,20 +78,23 @@ function getRandomColor( top ) {
 //Prints random quote to the screen by placing it in html element with id quote-box
 
 function printQuote( words ) {
-    getRandomQuote();
+        var selectedQuote = getRandomQuote();
 
-    text = quotes[quoteNum].quote;
-    sources = quotes[quoteNum].source;
-    words = "<p class='quote'>" + text + "</p>" +
-        "<p class='source'>" + sources + "</p>";
+        text = selectedQuote.quote;
+        sources = selectedQuote.source;
+        words = "<p class='quote'>" + text + "</p>" +
+            "<p class='source'>" + sources + "</p>";
 
 
-    document.getElementById('quote-box').innerHTML = words;
+        document.getElementById('quote-box').innerHTML = words;
 
 
 
 
 }
+
+
+
 
 //Displays random color to screen as background by placing it in html element with id back-color
 
@@ -94,7 +111,9 @@ printQuote(words);
 
 printBackColor(color);
 
-console.log(usedQuotes.length);
+
+
+
 //Prints new quote when 'show another quote' botton is clicked
 
 document.getElementById('loadQuote').addEventListener("click", printQuote);
